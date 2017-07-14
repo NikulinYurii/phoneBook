@@ -3,6 +3,8 @@ package app.service;
 import app.model.Contact;
 import app.model.User;
 import app.repository.ContactRepository;
+import app.validation.Validation;
+import app.validation.ValidationImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +17,7 @@ import java.util.List;
 public class ContactService {
 
     private final ContactRepository contactRepository;
+    private Validation validation = new ValidationImpl();
 
     @Autowired
     public ContactService(ContactRepository contactRepository) {
@@ -22,11 +25,17 @@ public class ContactService {
     }
 
     public boolean isContactExist(Contact contact) {
-        boolean isExist = contactRepository.findOne(contact.getId()) != null ? true : false;
+        boolean isExist = contactRepository.findOne(contact.getId()) == null ? true : false;
         return isExist;
     }
 
     public void addContact(Contact contact) {
+        if (isContactExist(contact) &&
+                validation.validFIO(contact.getName(),4) &&
+                validation.validFIO(contact.getSurname(),4) &&
+                validation.validFIO(contact.getMiddle_name(),4) &&
+                contact.getMobile()!=null)//todo valid email
+
         contactRepository.save(contact);
     }
 
