@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>phone</title>
+	<meta charset="utf-8">
+	<script type="text/javascript">
+		window.onload = function(){
+
+			var form = document.getElementsByTagName("form")[0];
+
+			document.getElementById("add").addEventListener("click",addctn,false);
+
+			function addctn(){
+				form.innerHTML = "<input type='text' value='' name='FN' placeholder='FN'><br><input type='text' value='' name='LN' placeholder='LN'><br><input type='text' value='' name='MN' placeholder='MN'><br><input type='text' value='' name='PH' placeholder='PH'><br><input type='text' value='' name='PHH' placeholder='PHH'><br><input type='text' value='' name='ADR' placeholder='ADR'><br><input type='text' value='' name='mail' placeholder='mail'><br><input type='submit' value='Send'>";
+			}
+
+		}
+	</script>
+</head>
+<body>
+	
+	<input type="button" id="add" value="Add contact">
+	<form method="post">
+	
+	</form>
+</body>
+</html>
