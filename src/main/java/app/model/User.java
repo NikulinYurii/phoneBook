@@ -15,19 +15,19 @@ public class User {
     private int id;
 
     @Column(name = "login", nullable = false)
-    private String login; //только английские символы, не меньше 3х, без спецсимволов
+    private String login;
 
     @Column(name = "pass", nullable = false)
-    private String pass;  //минимум 5 символов
+    private String pass;
 
     @Column(name = "user_name", nullable = false)
-    private String name;  //обязательный, минимум 4 символа
+    private String name;
 
     @Column(name = "user_surname", nullable = false)
-    private String surname; //обязательный, минимум 4 символа
+    private String surname;
 
-    @Column(name = "user_middlename", nullable = false)
-    private String middle_name;
+    /*@Column(name = "user_middlename", nullable = false)
+    private String middle_name;*/
 
     @OneToMany(targetEntity = Contact.class)
     private List<Contact> contactList;
@@ -35,12 +35,12 @@ public class User {
     public User() {
     }
 
-    public User(String login, String pass, String name, String surname, String middle_name) {
+    public User(String login, String pass, String name, String surname/*, String middle_name*/) {
         this.login = login;
         this.pass = pass;
         this.name = name;
         this.surname = surname;
-        this.middle_name = middle_name;
+        //this.middle_name = middle_name;
     }
 
     public int getId() {
@@ -83,13 +83,13 @@ public class User {
         this.surname = surname;
     }
 
-    public String getMiddle_name() {
+   /* public String getMiddle_name() {
         return middle_name;
     }
 
     public void setMiddle_name(String middle_name) {
         this.middle_name = middle_name;
-    }
+    }*/
 
     public List<Contact> getContactList() {
         return contactList;
@@ -106,7 +106,6 @@ public class User {
                 ", pass='" + pass + '\'' +
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
-                ", middle_name='" + middle_name + '\'' +
                 '}';
     }
 }

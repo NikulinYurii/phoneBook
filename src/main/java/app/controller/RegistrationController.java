@@ -9,12 +9,18 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import java.io.IOException;
 
 @Controller
 public class RegistrationController {
@@ -30,10 +36,11 @@ public class RegistrationController {
     }
 
     @RequestMapping(value = "/user/registration", method = RequestMethod.POST)
-    public ModelAndView registerUserAccount
-            (@ModelAttribute("user") @Valid UserDTO accountDto,
-             BindingResult result, WebRequest request, Errors errors) {
+    public String registerUserAccount(@ModelAttribute("userDto") @Valid UserDTO accountDto,
+                                            BindingResult result, WebRequest request,
+                                            Errors errors) {
         User registered = new User();
+
         if (!result.hasErrors()) {
             registered = createUserAccount(accountDto, result);
         }
@@ -41,11 +48,10 @@ public class RegistrationController {
             result.rejectValue("login", "message.regError");
         }
         if (result.hasErrors()) {
-            return new ModelAndView("registration", "user", accountDto);
+            return "redirect:/registration"; //new ModelAndView("registration", "user", accountDto);
         } else {
-            return new ModelAndView("successRegister", "user", accountDto);
+            return "redirect:/lol";//new ModelAndView("lol", "user", accountDto);
         }
-
     }
 
     private User createUserAccount(UserDTO accountDto, BindingResult result) {

@@ -9,6 +9,8 @@ import javax.validation.ConstraintValidatorContext;
  * Created by yurii on 14.07.17.
  */
 public class PasswordMatchesValidator implements ConstraintValidator<PasswordMatches, Object> {
+
+
     @Override
     public void initialize(PasswordMatches passwordMatches) {
     }
@@ -16,6 +18,7 @@ public class PasswordMatchesValidator implements ConstraintValidator<PasswordMat
     @Override
     public boolean isValid(Object obj, ConstraintValidatorContext constraintValidatorContext) {
         UserDTO user = (UserDTO) obj;
+
         return user.getPassword().equals(user.getMatchingPassword());
     }
 }

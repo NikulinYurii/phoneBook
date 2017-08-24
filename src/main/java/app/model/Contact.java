@@ -14,23 +14,23 @@ public class Contact {
     private int id;
 
     @Column(name = "contact_name", nullable = false)
-    private String name;  // минимум 4 символа
+    private String name;
 
     @Column(name = "contact_surname", nullable = false)
-    private String surname; //минимум 4 символа
+    private String surname;
 
-    @Column(name = "contact_middlename", nullable = false)
-    private String middle_name; // минимум 4 символа
+    /*@Column(name = "contact_middlename", nullable = false)
+    private String middle_name;*/
 
     @Column(name = "mobile_phone", nullable = false)
     private String mobile;
 
-    private String home_phone; //не обязательный
+    private String home_phone;
 
     @OneToOne
-    private Address address; //не обязательный
+    private Address address;
 
-    private String email; //не обязательный общепринятая валидация
+    private String email;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
@@ -39,17 +39,17 @@ public class Contact {
     public Contact() {
     }
 
-    public Contact(String name, String surname, String middle_name, String mobile_phone) {
+    public Contact(String name, String surname/*, String middle_name*/, String mobile_phone) {
         this.name = name;
         this.surname = surname;
-        this.middle_name = middle_name;
+        //this.middle_name = middle_name;
         this.mobile = mobile_phone;
     }
 
-    public Contact(String name, String surname, String middle_name, String mobile_phone, String home_phone, Address address, String email) {
+    public Contact(String name, String surname/*, String middle_name*/, String mobile_phone, String home_phone, Address address, String email) {
         this.name = name;
         this.surname = surname;
-        this.middle_name = middle_name;
+        //this.middle_name = middle_name;
         this.mobile = mobile_phone;
         this.home_phone = home_phone;
         this.address = address;
@@ -80,14 +80,14 @@ public class Contact {
         this.surname = surname;
     }
 
-    public String getMiddle_name() {
+    /*public String getMiddle_name() {
         return middle_name;
     }
 
     public void setMiddle_name(String middle_name) {
         this.middle_name = middle_name;
     }
-
+*/
     public String getMobile() {
         return mobile;
     }
@@ -133,7 +133,6 @@ public class Contact {
         return "Contact{" +
                 "name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
-                ", middle_name='" + middle_name + '\'' +
                 ", mobile='" + mobile + '\'' +
                 ", home_phone='" + home_phone + '\'' +
                 ", address=" + address +

@@ -5,24 +5,20 @@ import javax.validation.ConstraintValidatorContext;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**
- * Created by yurii on 14.07.17.
- */
-public class EmailValidator implements ConstraintValidator<ValidEmail, String>{
+public class EmailValidator implements ConstraintValidator<ValidEmail, String> {
 
     private Pattern pattern;
     private Matcher matcher;
     private static final String EMAIL_PATTERN =
-            "^[_A-Za-z0-9-+]+(.[_A-Za-z0-9-]+)*@" +
-            "[A-Za-z0-9-]+(.[A-Za-z0-9]+)*(.[A-Za-z]{2,})$";
+            "^[A-Za-z0-9+_.-]+@(.+)$";
 
     @Override
-    public void initialize(ValidEmail validEmail) {
+    public void initialize(ValidEmail constraintAnnotation) {
     }
 
     @Override
-    public boolean isValid(String email, ConstraintValidatorContext constraintValidatorContext) {
-        return validateEmail(email);
+    public boolean isValid(String email, ConstraintValidatorContext context) {
+        return (validateEmail(email));
     }
 
     private boolean validateEmail(String email) {
